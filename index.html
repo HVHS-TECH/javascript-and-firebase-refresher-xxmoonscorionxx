@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>JavaScript and Firebase refresher</title>
-    
+    <title>java Script Refresher</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+    <!-- firebase start ****************************************-->
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <!-- firebase end ******************************************-->
 </head>
 
 
@@ -44,6 +51,17 @@
     <p>You learned all this last year. You just need to remember how!<br>
         You can Google it, ask a friend, copy from last year's work, even look at <a href="https://sites.google.com/hvhs.school.nz/technology/COMP/12COMP/12-databases/br-firebase-skills">last year's notes</a>, works for you.<br>
         By the end of the week you will have Firebase going.</p>
-    <script src="/main.mjs"></script>
+        <section>
+        <div class="container">
+            <div class="column">
+                <button onclick="fb_initialise()">initialise firebase</button>
+                <button onclick="fb_authenticate()">authenticate</button>
+                <!--<button onclick="fb_onAuthStateChanged()">detect login change</button>
+                <button onclick="fb_signOut()">logout</button> -->
+            </div>
+        </section>
+            
+    <script type="module" src="/main.mjs"></script>
+
 </body>
 </html>
