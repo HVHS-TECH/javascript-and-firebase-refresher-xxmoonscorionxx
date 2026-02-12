@@ -3,9 +3,10 @@ const COL_B = '#CD7F32';
 
 console.log('%c fb_io.mjs',
     'color: blue; background-color: white;');
-var fb_gamedb;
-var userUID;
-var userName;
+let fb_gamedb;
+let userUID;
+let userName;
+let verifyUser = null;
 
 
 /**************************************************************/
@@ -33,7 +34,7 @@ import { update }
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export {
-   fb_test, fb_initialise, //fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readRecord, fb_readAll, fb_destroy, fb_updateRecord
+   fb_test, fb_initialise, fb_readRecord //,fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord
 };
 function fb_test() {
     console.log("Test")
@@ -55,7 +56,7 @@ function fb_initialise() {
             console.info(fb_gamedb);
             console.log("Hello:")
             console.log("working function")
-    const AUTH = getAuth();
+    const AUTH = getAuth(FB_GAMEAPP);
     const PROVIDER = new GoogleAuthProvider();
 
     // The following makes Google ask the user to select the account
@@ -73,8 +74,34 @@ function fb_initialise() {
         userUID = result.user.uid;
       //  const userEmail = result.user.email;
          userName = result.user.displayName;
+         const dbReference= ref(fb_gamedb, ('Users/'+ userName));
+         document.getElementById("readDataBaseName").innerHTML = userName;
+
+    set(dbReference, { Score: 3, UID: userUID}).then(() => {
+
+
+    }).catch((error) => {
+        console.log("error:  " + error)
+
+
+    });
     }).catch((error) => {
         console.log("error authenticating: " + error);
        // document.getElementById("p_fbAuthenticate").innerHTML = "Failled Authenticating";
+    });
+}
+function fb_readRecord() {
+    const dbReference= ref(fb_gamedb, "Games/FarLands/Users");
+
+    get(dbReference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+        document.getElementById("readDataBasename").innerHTML = fb_data;
+        console.log("Data: " + fb_data);
+        } else {
+        document.getElementById("readDataBasename").innerHTML = "No Record Found";
+        }
+    }).catch((error) => {
+        console.log("error:  " + error );
     });
 }
