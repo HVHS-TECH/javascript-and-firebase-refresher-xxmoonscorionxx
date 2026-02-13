@@ -34,7 +34,7 @@ import { update }
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export {
-   fb_test, fb_initialise, fb_readRecord //,fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord
+   fb_test, fb_initialise, fb_readRecord, submitData //,fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord
 };
 function fb_test() {
     console.log("Test")
@@ -74,10 +74,10 @@ function fb_initialise() {
         userUID = result.user.uid;
       //  const userEmail = result.user.email;
          userName = result.user.displayName;
-         const dbReference= ref(fb_gamedb, ('Users/'+ userName));
-         document.getElementById("readDataBaseName").innerHTML = userName;
+         const dbReference= ref(fb_gamedb, ('Users/'+ userUID));
+   //      document.getElementById("readDataBaseName").innerHTML = userName;
 
-    set(dbReference, { Score: 3, UID: userUID}).then(() => {
+    set(dbReference, { Name: userName}).then(() => {
 
 
     }).catch((error) => {
@@ -91,17 +91,32 @@ function fb_initialise() {
     });
 }
 function fb_readRecord() {
-    const dbReference= ref(fb_gamedb, "Games/FarLands/Users");
+    const dbReference= ref(fb_gamedb, "Users/"+ userUID);
 
     get(dbReference).then((snapshot) => {
         var fb_data = snapshot.val();
+        fb_data = fb_data.Name;
         if (fb_data != null) {
-        document.getElementById("readDataBasename").innerHTML = fb_data;
+        //document.getElementById("readDataBasename").innerHTML = fb_data;
         console.log("Data: " + fb_data);
+        document.getElementById("readDataBaseName").innerHTML = fb_data;
         } else {
-        document.getElementById("readDataBasename").innerHTML = "No Record Found";
+        //document.getElementById("readDataBasename").innerHTML = "No Record Found";
         }
     }).catch((error) => {
         console.log("error:  " + error );
+    });
+}
+function submitData() {
+    const dataInput = document.getElementById("dataInput").value;
+    const dataInput2 = document.getElementById("dataInput2").value;
+    const dbReference= ref(fb_gamedb, ('Users/'+ userUID + "/" + dataInput));
+   //      document.getElementById("readDataBaseName").innerHTML = userName;
+
+    set(dbReference, { Data: dataInput2}).then(() => {
+
+    }).catch((error) => {
+        console.log("error authenticating: " + error);
+       // document.getElementById("p_fbAuthenticate").innerHTML = "Failled Authenticating";
     });
 }
