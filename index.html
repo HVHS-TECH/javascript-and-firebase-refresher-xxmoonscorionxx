@@ -23,9 +23,10 @@
     <ul>
         <li>Connect the JavaScript file - this page will tell you when it is done</li>
         <li>Add a button - Make it change the heading "You pressed the button!" </li>
-        <button id="button2" type="button">click me</button>
+        <button onclick="changeHeading()">click me</button>
         <li id="textChange">Add a text input</li>
         <li>The button puts the text in the heading</li>
+        <input type="text" id="textInput" placeholder="Enter text to update heading">
         <li>Get rid of the alert - the button updates the heading of this page</li>
     </ul>
     <h4>Firebase basics</h4>
@@ -60,6 +61,24 @@
                 <p class="p_fbStatus">The username: <span id="readDataBaseName"> n/a</span></p>
             </div>
         </section>
+        <h3>Message Board</h3>
+        <div class="Message Board">
+            <ul>
+                <li id="message1"></li>
+                <li id="message2"></li>
+                <li id="message3"></li>
+                <li id="message4"></li>
+                <li id="message5"></li>
+            </ul>
+        </div>
+
+        <button onclick="refreshMessages()">refresh</button>
+
+
+
+
+
+
             
     <script type="module" src="/main.mjs"></script>
     <input type="text" id="dataInput" placeholder="What u want ur path to be?">

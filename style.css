@@ -3,7 +3,6 @@ body {
     display: flex;
     flex-direction: column; /* <<< ADD THIS */
     justify-content: flex-start; /* <<< ADD THIS */
-    align-items: center;
     min-height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
@@ -20,22 +19,9 @@ body {
     gap: 10px;
   }
   
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #40cfd4;
-    color: #fff;
-    transition: background-color 0.3s;
-    width: 220px; /* Set a fixed width */
-    text-align: center;
-  }
+
   
-  button:hover {
-    background-color: #30a1a5;
-  }
+ 
   
   /*-----------------------------------------------------------*
     Firebase status div styling

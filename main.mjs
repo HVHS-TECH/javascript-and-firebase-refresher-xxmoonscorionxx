@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 const COL_C = 'white';	    // These two const are part of the coloured 	
 const COL_B = '#CD7F32';	//  console.log for functions scheme
 
-import { fb_initialise, fb_readRecord, submitData //, fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord  
+import { fb_initialise, fb_readRecord, submitData, refreshMessages, changeHeading //, fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord  
 
 }
     from './fb_io.mjs';
@@ -15,6 +15,8 @@ import { fb_initialise, fb_readRecord, submitData //, fb_authenticate, fb_onAuth
 window.fb_initialise = fb_initialise;
 window.fb_readRecord = fb_readRecord;
 window.submitData = submitData;
+window.refreshMessages = refreshMessages;
+window.changeHeading = changeHeading;
 /**window.fb_authenticate = fb_authenticate; 
 window.fb_onAuthStateChanged = fb_onAuthStateChanged;
 window.fb_signOut = fb_signOut;
@@ -24,9 +26,5 @@ window.fb_readAll = fb_readAll;
 window.fb_destroy = fb_destroy;
 window.fb_updateRecord = fb_updateRecord; **/
 
-function changeHeading() {
-    var changingMessage = document.getElementById("You pressed the button");
-    changingMessage.innerHTML = "You pressed the button!";
-    console.log("working")
-}
+
 

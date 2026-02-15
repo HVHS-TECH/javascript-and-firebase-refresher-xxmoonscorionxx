@@ -34,11 +34,11 @@ import { update }
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export {
-   fb_test, fb_initialise, fb_readRecord, submitData //,fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord
+   fb_test, fb_initialise, fb_readRecord, submitData, refreshMessages, changeHeading//,fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord
 };
 function fb_test() {
     console.log("Test")
-}
+};
 function fb_initialise() {
     console.log('%c fb_initialise(): ',
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
@@ -66,7 +66,7 @@ function fb_initialise() {
 
     // Create a popup window to sign in
     signInWithPopup(AUTH, PROVIDER).then((result) => {
-        //document.getElementById("p_fbAuthenticate").innerHTML = "Authenticated";
+
         
         console.log(result.user.uid);
         console.log(result.user.email);
@@ -75,7 +75,7 @@ function fb_initialise() {
       //  const userEmail = result.user.email;
          userName = result.user.displayName;
          const dbReference= ref(fb_gamedb, ('Users/'+ userUID));
-   //      document.getElementById("readDataBaseName").innerHTML = userName;
+
 
     set(dbReference, { Name: userName}).then(() => {
 
@@ -86,11 +86,38 @@ function fb_initialise() {
 
     });
     }).catch((error) => {
+
+    });
+};
+function fb_readRecord() {
+    const dbReference= ref(fb_gamedb, "Users/"+ userUID);
+
+    get(dbReference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        fb_data = fb_data.Name;
+        if (fb_data != null) {
+        console.log("Data: " + fb_data);
+        document.getElementById("readDataBaseName").innerHTML = fb_data;
+        } else {
+        }
+    }).catch((error) => {
+        console.log("error:  " + error );
+    });
+};
+function submitData() {
+    const dataInput = document.getElementById("dataInput").value;
+    const dataInput2 = document.getElementById("dataInput2").value;
+    const dbReference= ref(fb_gamedb, ('Users/'+ userUID + "/" + dataInput));
+   //      document.getElementById("readDataBaseName").innerHTML = userName;
+
+    set(dbReference, { Data: dataInput2}).then(() => {
+
+    }).catch((error) => {
         console.log("error authenticating: " + error);
        // document.getElementById("p_fbAuthenticate").innerHTML = "Failled Authenticating";
     });
-}
-function fb_readRecord() {
+};
+function refreshMessages() {
     const dbReference= ref(fb_gamedb, "Users/"+ userUID);
 
     get(dbReference).then((snapshot) => {
@@ -106,17 +133,9 @@ function fb_readRecord() {
     }).catch((error) => {
         console.log("error:  " + error );
     });
-}
-function submitData() {
-    const dataInput = document.getElementById("dataInput").value;
-    const dataInput2 = document.getElementById("dataInput2").value;
-    const dbReference= ref(fb_gamedb, ('Users/'+ userUID + "/" + dataInput));
-   //      document.getElementById("readDataBaseName").innerHTML = userName;
-
-    set(dbReference, { Data: dataInput2}).then(() => {
-
-    }).catch((error) => {
-        console.log("error authenticating: " + error);
-       // document.getElementById("p_fbAuthenticate").innerHTML = "Failled Authenticating";
-    });
+};
+function changeHeading() {
+    const heading = document.getElementById("welcomeMessage");
+    heading.innerHTML = "You pressed the button!";
+    console.log("working");
 }
