@@ -26,7 +26,7 @@
         <button onclick="changeHeading()">click me</button>
         <li id="textChange">Add a text input</li>
         <li>The button puts the text in the heading</li>
-        <input type="text" id="textInput" placeholder="Enter text to update heading">
+        <input type="text" id="textInputHeader" placeholder="Enter text to update heading">
         <li>Get rid of the alert - the button updates the heading of this page</li>
     </ul>
     <h4>Firebase basics</h4>
@@ -61,18 +61,12 @@
                 <p class="p_fbStatus">The username: <span id="readDataBaseName"> n/a</span></p>
             </div>
         </section>
-        <h3>Message Board</h3>
-        <div class="Message Board">
-            <ul>
-                <li id="message1"></li>
-                <li id="message2"></li>
-                <li id="message3"></li>
-                <li id="message4"></li>
-                <li id="message5"></li>
-            </ul>
-        </div>
-
-        <button onclick="refreshMessages()">refresh</button>
+        
+    <input id="messageInput" placeholder="Type a message">
+    <button onclick="saveMessage()">Save Message</button>
+    <h3>Message Board</h3>
+    <button onclick="showMessages()">Show All Messages</button>
+    <div id="allMessages"></div>
 
 
 

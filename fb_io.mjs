@@ -7,6 +7,7 @@ let fb_gamedb;
 let userUID;
 let userName;
 let verifyUser = null;
+let firstButtonPressed = 0;
 
 
 /**************************************************************/
@@ -34,7 +35,7 @@ import { update }
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export {
-   fb_test, fb_initialise, fb_readRecord, submitData, refreshMessages, changeHeading//,fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord
+   fb_test, fb_initialise, fb_readRecord, submitData, refreshMessages, changeHeading, saveMessage, showMessages//,fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord
 };
 function fb_test() {
     console.log("Test")
@@ -135,7 +136,38 @@ function refreshMessages() {
     });
 };
 function changeHeading() {
-    const heading = document.getElementById("welcomeMessage");
-    heading.innerHTML = "You pressed the button!";
-    console.log("working");
+    if (firstButtonPressed == 0) {
+        const heading = document.getElementById("welcomeMessage");
+        heading.innerHTML = "You pressed the button!";
+        console.log("working");
+        firstButtonPressed = 1;
+    } else {
+        const headingInput = document.getElementById("textInputHeader").value;
+        const heading = document.getElementById("welcomeMessage");
+        heading.innerHTML = headingInput;
+    }
+    
+}   
+function saveMessage() {
+    const messageText = document.getElementById("messageInput").value;
+    const dbReference = ref(fb_gamedb, "Messages/" + Date.now());
+    set(dbReference, {user: userName, text: messageText
+    }).then(() => {
+        console.log("Message saved");
+    }).catch((error) => {
+        console.log("error: " + error);
+    });
+}
+function showMessages() {
+    const dbReference = ref(fb_gamedb, "Messages");
+    get(dbReference).then((snapshot) => {
+        const data = snapshot.val();
+        let output = "";
+        for (var key in data) {
+         output += data[key].user + ": " + data[key].text + "<br>";
+        }
+        document.getElementById("allMessages").innerHTML = output;
+       }).catch((error) => {
+        console.log("error: " + error);
+    });
 }

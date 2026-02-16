@@ -7,12 +7,14 @@ document.addEventListener("DOMContentLoaded", function() {
 const COL_C = 'white';	    // These two const are part of the coloured 	
 const COL_B = '#CD7F32';	//  console.log for functions scheme
 
-import { fb_initialise, fb_readRecord, submitData, refreshMessages, changeHeading //, fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord  
+import { fb_initialise, fb_readRecord, submitData, refreshMessages, changeHeading, saveMessage, showMessages //, fb_authenticate, fb_onAuthStateChanged, fb_signOut, fb_writeRecord, fb_readAll, fb_destroy, fb_updateRecord  
 
 }
     from './fb_io.mjs';
 
 window.fb_initialise = fb_initialise;
+window.saveMessage = saveMessage;
+window.showMessages = showMessages;
 window.fb_readRecord = fb_readRecord;
 window.submitData = submitData;
 window.refreshMessages = refreshMessages;
